@@ -1,0 +1,9 @@
+# Misc Terraform
+terraform/.terraform
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/hcloud.tfvars
+terraform/exec/*.sh
+terraform/create
+terraform/destroy
+terraform/*.lock*
