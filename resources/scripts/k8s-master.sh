@@ -9,11 +9,11 @@ sudo systemctl enable kubelet
 ## Bootstrap the cluster without DNS endpoint
 # 10.244.0.0/16 is the default Flannel network
 kubeadm init \
-  --pod-network-cidr=10.244.0.0/16 \
-  --apiserver-advertise-address=0.0.0.0 \
-  --upload-certs \
-  --control-plane-endpoint=k8s-master \
-  --cri-socket unix:///run/cri-dockerd.sock
+    --pod-network-cidr=10.244.0.0/16 \
+    --apiserver-advertise-address=0.0.0.0 \
+    --upload-certs \
+    --control-plane-endpoint=k8s-master \
+    --cri-socket unix:///run/cri-dockerd.sock
 
 # Copy the kubeconfig to the local user
 mkdir -p "$HOME/.kube"
@@ -26,8 +26,8 @@ kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Doc
 
 # Cloud config
 kubectl -n kube-system create secret generic hcloud \
-  --from-literal=token="$1" \
-  --from-literal=network="$2"
+    --from-literal=token="$1" \
+    --from-literal=network="$2"
 
 # Hetnzer Cloud Controller
 kubectl -n kube-system apply -f https://github.com/hetznercloud/hcloud-cloud-controller-manager/releases/download/v1.13.2/ccm-networks.yaml
@@ -42,11 +42,11 @@ kubectl apply -f /tmp/nginx.yaml
 
 # Connect Load Balancer to Ingress Controller
 kubectl -n ingress-nginx annotate services ingress-nginx-controller \
-  load-balancer.hetzner.cloud/name="$3" \
-  load-balancer.hetzner.cloud/location="nbg1" \
-  load-balancer.hetzner.cloud/use-private-ip="true" \
-  load-balancer.hetzner.cloud/uses-proxyprotocol="true" \
-  load-balancer.hetzner.cloud/hostname="$4"
+    load-balancer.hetzner.cloud/name="$3" \
+    load-balancer.hetzner.cloud/location="nbg1" \
+    load-balancer.hetzner.cloud/use-private-ip="true" \
+    load-balancer.hetzner.cloud/uses-proxyprotocol="true" \
+    load-balancer.hetzner.cloud/hostname="$4"
 
 # Cleanup temporary files
 rm /tmp/nginx.yaml

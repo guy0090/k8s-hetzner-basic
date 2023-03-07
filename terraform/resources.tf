@@ -35,7 +35,7 @@ resource "hcloud_firewall" "master-fw" {
     direction   = "in"
     protocol    = "tcp"
     port        = "22"
-    source_ips = [
+    source_ips  = [
       "0.0.0.0/0",
       "::/0"
     ]
@@ -45,7 +45,7 @@ resource "hcloud_firewall" "master-fw" {
     direction   = "in"
     protocol    = "tcp"
     port        = "80"
-    source_ips = [
+    source_ips  = [
       "0.0.0.0/0",
       "::/0"
     ]
@@ -55,7 +55,7 @@ resource "hcloud_firewall" "master-fw" {
     direction   = "in"
     protocol    = "tcp"
     port        = "443"
-    source_ips = [
+    source_ips  = [
       "0.0.0.0/0",
       "::/0"
     ]
@@ -65,7 +65,7 @@ resource "hcloud_firewall" "master-fw" {
     direction   = "in"
     protocol    = "tcp"
     port        = "6443"
-    source_ips = [
+    source_ips  = [
       "0.0.0.0/0",
       "::/0"
     ]
@@ -75,7 +75,7 @@ resource "hcloud_firewall" "master-fw" {
     direction   = "in"
     protocol    = "udp"
     port        = "8472"
-    source_ips = [
+    source_ips  = [
       "0.0.0.0/0",
       "::/0"
     ]
@@ -90,7 +90,7 @@ resource "hcloud_firewall" "worker-fw" {
     direction   = "in"
     protocol    = "tcp"
     port        = "22"
-    source_ips = [
+    source_ips  = [
       "0.0.0.0/0",
       "::/0"
     ]
@@ -100,7 +100,7 @@ resource "hcloud_firewall" "worker-fw" {
     direction   = "in"
     protocol    = "tcp"
     port        = "80"
-    source_ips = [
+    source_ips  = [
       "0.0.0.0/0",
       "::/0"
     ]
@@ -110,7 +110,7 @@ resource "hcloud_firewall" "worker-fw" {
     direction   = "in"
     protocol    = "tcp"
     port        = "443"
-    source_ips = [
+    source_ips  = [
       "0.0.0.0/0",
       "::/0"
     ]
@@ -120,7 +120,7 @@ resource "hcloud_firewall" "worker-fw" {
     direction   = "in"
     protocol    = "tcp"
     port        = "30000-32767"
-    source_ips = [
+    source_ips  = [
       "0.0.0.0/0",
       "::/0"
     ]
@@ -130,7 +130,7 @@ resource "hcloud_firewall" "worker-fw" {
     direction   = "in"
     protocol    = "udp"
     port        = "8472"
-    source_ips = [
+    source_ips  = [
       "0.0.0.0/0",
       "::/0"
     ]
@@ -177,8 +177,8 @@ resource "hcloud_server" "master" {
     ]
   }
   provisioner "local-exec" {
-    command = "rm -rfv ./exec/k8s-join.sh && ssh root@${self.ipv4_address} -o StrictHostKeyChecking=no -i ${var.auth_key} 'kubejoin' > ./exec/k8s-join.sh"
-    interpreter = [ "bash", "-c" ]
+    command     = "rm -rfv ./exec/k8s-join.sh && ssh root@${self.ipv4_address} -o StrictHostKeyChecking=no -i ${var.auth_key} 'kubejoin' > ./exec/k8s-join.sh"
+    interpreter = ["bash", "-c"]
   }
 }
 
@@ -210,7 +210,7 @@ resource "hcloud_server" "worker" {
     ]
   }
   provisioner "local-exec" {
-    command = "ssh root@${hcloud_server.master.ipv4_address} -o StrictHostKeyChecking=no -i ${var.auth_key} '/root/cert-man.sh ${count.index+1}'"
-    interpreter = [ "bash", "-c" ]
+    command     = "ssh root@${hcloud_server.master.ipv4_address} -o StrictHostKeyChecking=no -i ${var.auth_key} '/root/cert-man.sh ${count.index + 1}'"
+    interpreter = ["bash", "-c"]
   }
 }

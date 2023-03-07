@@ -7,12 +7,12 @@ if [[ "$1" == "1" ]]; then
 
     helm install \
     cert-manager jetstack/cert-manager \
-    --namespace cert-manager \
-    --create-namespace \
-    --version v1.11.0 \
-    --set installCRDs=true \
-    --set startupapicheck.timeout=5m \
-    --set webhook.securePort=12050
+        --namespace cert-manager \
+        --create-namespace \
+        --version v1.11.0 \
+        --set installCRDs=true \
+        --set startupapicheck.timeout=5m \
+        --set webhook.securePort=12050
 
     # Grab a random Email
     ACME_MAIL=$(curl -sX GET "https://www.1secmail.com/api/v1/?action=genRandomMailbox&count=1" | jq -r .[0])

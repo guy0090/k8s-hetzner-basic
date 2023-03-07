@@ -14,8 +14,8 @@ cloud = ({
   location      = "nbg1"         # Datacenter location (nbg1, fsn1, etc.)
   # Networking
   net_name      = "k8s-net"      # Network name (displayed in Hetzner Cloud console)
-  net_id        = "10.98.0."     # The network ID to use for the servers (default mask 16), e.g. "192.168.0.", "10.1.0.", etc
-  net_mark      = "/16"
+  net_id        = "10.98.0."     # The network ID to use for the servers, e.g. "192.168.0.", "10.1.0.", etc
+  net_mask      = "16"           # The network mask to use for the servers, e.g. "24", "16", etc. Make sure net_id and net_mask are compatible
   # Load Balancer
   lb_name       = "k8s-lb"       # Load balancer name (displayed in Hetzner Cloud console)
   lb_type       = "lb11"         # Load balancer type (lb11, lb21, etc.)
@@ -26,8 +26,9 @@ cloud = ({
   master_name   = "master-1"     # Master server name
   master_type   = "cx21"         # Master server type (cx11, cx21, etc.)
   # Workers
-  worker_prefix = "node-"      # Each worker will be named "node-1", "node-2", etc.
+  worker_prefix = "node-"        # Each worker will be named "node-1", "node-2", etc.
   worker_type   = "cx21"         # Worker server type (cx11, cx21, etc.)
   workers       = 2              # Number of worker servers to create
 })
+
 
